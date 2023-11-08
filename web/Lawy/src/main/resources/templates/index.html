@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Lawy | 판결 예측 서비스</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./css/index.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script>
+        function onPredict() {
+            if ($('.loading').css("display") === 'none') {
+                $('.loading').css("display", "flex");
+                setTimeout(() => {
+                    if ($('.loading').css("display") === 'flex') {
+                        $('.loading').css("display", "none");
+                    }
+                    if ($('.result').css("display") === 'none') {
+                        $('.result').css("display", "block");
+                    }
+                }, 2000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="loading">
+            <div class="loading-main">
+                <span class="loader"></span>
+            </div>
+        </div>
+        <div class="header">
+            <div class="header-left">
+                <p>Lawy</p><p>.</p>
+            </div>
+        </div>
+        <div class="main">
+            <div class="gap-60"></div>
+            <h1 class="bottom-gap-10">판결 예측</h1>
+            <p>사건에 대한 정보를 바탕으로 판결을 예측합니다.<br>예측된 판결은 법적 효력을 갖지 않습니다.</p>
+            <div class="gap-20"></div>
+            <h2 class="bottom-gap-10">- 사건 정보</h2>
+            <div class="recm-keywords bottom-gap-10">
+                <p>추천 키워드</p>
+                <p>어린이보호구역</p>
+                <p>난폭운전</p>
+                <p>음주단속</p>
+                <p>중앙선 침범</p>
+                <p>속도의 위반</p>
+                <p>동종 전력</p>
+                <p>버스정류장</p>
+                <p>위반장소</p>
+                <p>운전업무</p>
+            </div>
+            <textarea placeholder="사건에 대한 정보를 입력해주세요.&#10;예) 어린이보호구역에서 음주단속 거부" class="bottom-gap-10"></textarea>
+            <button class="full" onclick="onPredict()">예측</button>
+            <div class="gap-20"></div>
+            <div class="result">
+                <div class="divider"></div>
+                <div class="gap-30"></div>
+                <h1>예측 결과</h1>
+                <div class="gap-20"></div>
+                <div class="result-element bottom-gap-30">
+                    <h2>- 징역</h2>
+                    <h1>6 개월</h1>
+                    <progress value="35" max="100"></progress>
+                    <div class="progress-caption">
+                        <p>0개월</p>
+                        <p>3년</p>
+                    </div>
+                    <div class="gap-15"></div>
+                    <p>입력한 사건에 대해 약 6개월의 징역이 예상됩니다.</p>
+                </div>
+                <div class="result-element bottom-gap-30">
+                    <h2>- 집행유예 가능성</h2>
+                    <h1>97 %</h1>
+                    <progress value="97" max="100"></progress>
+                    <div class="progress-caption">
+                        <p>0%</p>
+                        <p>100%</p>
+                    </div>
+                    <div class="gap-15"></div>
+                    <p>입력한 사건에 대해 집행유예로 판정될 가능성이 97% 입니다.</p>
+                </div>
+                <div class="result-element bottom-gap-30">
+                    <h2>- 벌금</h2>
+                    <h1>1,000,000 만원</h1>
+                    <progress value="25" max="100"></progress>
+                    <div class="progress-caption">
+                        <p>0원</p>
+                        <p>40,000,000원</p>
+                    </div>
+                    <div class="gap-15"></div>
+                    <p>입력한 사건에 대해 약 1,000,000 만원의 벌금이 예상됩니다.</p>
+                </div>
+                <div class="result-element bottom-gap-30">
+                    <h2>- 판례</h2>
+                    <div class="gap-10"></div>
+                    <textarea readonly>피고인에 대한 형을 징역 1년으로 정한다.&#10;다만 이 판결 확정일부터 2년간 위 형의 집행을 유예한다.&#10;피고인에게 120시간의 사회봉사와 40시간의 준법운전강의&#10;수강을 명한다.</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
