@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="./css/index.css"/>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script>
+        var hasResponseArrived = false;
+
         function connectToServer() {
             websocket = new WebSocket("ws://" + window.location.host + "/ws");
             websocket.onopen = (e) => onOpen(e);
             websocket.onmessage = (e) => onSocketMessage(e);
-            websocket.onerror = (e) => onSocketError(e);
+            websocket.onclose = (e) => onClose(e);
         }
 
         function onOpen(e) {
@@ -50,17 +52,30 @@
                     $("#similar_precedents")[0].innerHTML += `<div class="similar-precedent"><a target="_blank" href="https://lbox.kr/case/${splittedElement[0]}">${splittedElement[0]}</a><p>${splittedElement[1]}% 일치</p></div>`;
                 });
 
+                hasResponseArrived = true;
+                websocket.close();
 
-                // 로딩창 숨김
-                if ($('.loading').css("display") === 'flex') {
-                    $('.loading').css("display", "none");
-                }
+                // 스크롤 이동
+                $('.full')[0].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function onClose(e) {
+            if (hasResponseArrived) {
                 // 결과창 표시
                 if ($('.result').css("display") === 'none') {
                     $('.result').css("display", "block");
                 }
-                websocket.close();
-                // connected = false;
+                hasResponseArrived = false;
+            } else {
+                // 결과창 숨김
+                if ($('.result').css("display") === 'block') {
+                    $('.result').css("display", "none");
+                }
+            }
+            // 로딩창 숨김
+            if ($('.loading').css("display") === 'flex') {
+                $('.loading').css("display", "none");
             }
         }
 
