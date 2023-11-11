@@ -22,8 +22,8 @@ a { color: #414141; }
 
 .main { padding: 30px 20px; }
 
-.recm-keywords > p { display: inline-block; color: #f4d119; font-size: 12pt; padding-right: 5px; padding-bottom: 5px; }
-.recm-keywords > p:nth-child(1) { color: #646464; padding-right: 10px; }
+.recm-keywords > p { display: inline-block; color: #646464; font-size: 12pt; padding-right: 5px; padding-bottom: 5px; }
+.recm-keywords > p:nth-child(n + 2) { color: #f4d119; padding-right: 10px; cursor: pointer; }
 
 .result { display: none; }
 .result-element > h1 { font-size: 17pt; margin: 20px 0; text-align: center; }
@@ -35,7 +35,7 @@ a { color: #414141; }
 .loading-main { width: 80px; height: 80px; background-color: white; border-radius: 5px; display: flex; justify-content: center; align-items: center; }
 .loader { width: 35px; height: 35px; border: 4px solid #FFDA17; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
 
-button { font-size: 11pt; -webkit-appearance:none; padding-bottom: 2px; }
+button { font-size: 11pt; -webkit-appearance:none; padding-bottom: 2px; cursor: pointer; }
 button.full { width: 100%; height: 50px; background-color: #FFDA17; border: none; border-radius: 5pt; color: black; }
 button:active { background-color: #f3cf10; }
 
