@@ -54,9 +54,6 @@
 
                 hasResponseArrived = true;
                 websocket.close();
-
-                // 스크롤 이동
-                $('.full')[0].scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -66,6 +63,8 @@
                 if ($('.result').css("display") === 'none') {
                     $('.result').css("display", "block");
                 }
+                // 스크롤 이동
+                $('.full')[0].scrollIntoView({ behavior: 'smooth' });
                 hasResponseArrived = false;
             } else {
                 // 결과창 숨김
@@ -95,6 +94,30 @@
                 connectToServer();
             }
         }
+
+        $(window).on('load', () => {
+            // 추천 키워드 단어 추출
+            let keywords = ["사고후미조치", "혈중알코올농도", "금지규정", "경합범가중", "전동킥보드", "신호 위반", "중앙선 침범", "음주측정", "범죄전력", "난폭운전", "음주단속", "동종 전력", "누범 전력", "과실재물손괴", "위험운전치상", "의무보험", "사문서위조", "버스정류장", "택시정거장", "주·정차 금지장소", "음주측정거부", "자동차전용도로", "손괴 후 미조치", "운전업무", "중앙분리대", "도주치상", "신호 또는 지시 위반", "안전거리 미확보", "진로변경 금지 위반", "급제동 금지 위반", "연쇄 추돌", "집해유예기간", "어린이보호구역"];
+            let recm_keywords = [];
+
+            for (i = 0; i < 10; i++) {
+                n = Math.floor(Math.random() * keywords.length);
+                if (recm_keywords.indexOf(keywords[n]) === -1)
+                    recm_keywords.push(keywords[n]);
+                else
+                    i--;
+            }
+
+            // 추천 키워드 단어 주입
+            recm_keywords.forEach((element) => {
+                $(".recm-keywords")[0].innerHTML += `<p>${element}</p>`;
+            });
+
+            // 추천 키워드 단어 클릭시 텍스트 추가
+            $(".recm-keywords > p:nth-child(n + 2)").click((element) => {
+                $('#case_info')[0].value += element.target.innerText + " ";
+            });
+        });
     </script>
 </head>
 <body>
@@ -117,17 +140,8 @@
             <h2 class="bottom-gap-10">- 사건 정보</h2>
             <div class="recm-keywords bottom-gap-10">
                 <p>추천 키워드</p>
-                <p>어린이보호구역</p>
-                <p>난폭운전</p>
-                <p>음주단속</p>
-                <p>중앙선 침범</p>
-                <p>속도의 위반</p>
-                <p>동종 전력</p>
-                <p>버스정류장</p>
-                <p>위반장소</p>
-                <p>운전업무</p>
             </div>
-            <textarea id="case_info" placeholder="사건에 대한 정보를 입력해주세요.&#10;예) 어린이보호구역에서 음주단속 거부" class="bottom-gap-10"></textarea>
+            <textarea id="case_info" placeholder="사건에 대한 정보를 입력해주세요.&#10;예) 초등학교 앞 사거리에서 음주운전" class="bottom-gap-10"></textarea>
             <button class="full" onclick="onPredict()">예측</button>
             <div class="gap-20"></div>
             <div class="result">
