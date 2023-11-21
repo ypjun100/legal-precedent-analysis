@@ -16,20 +16,33 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	configureEach {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' // exclude default logger
+	}
 }
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Log4j2
+	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+
+	// Recap
+	implementation "kr.bydelta:koalanlp-hnn:2.1.4:assembly" // 형태소 분석기
+	implementation 'com.github.team-recap:recap:v0.0.6'
 }
 
 tasks.named('bootBuildImage') {

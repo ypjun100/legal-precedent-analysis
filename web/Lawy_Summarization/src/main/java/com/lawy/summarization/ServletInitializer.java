@@ -1,4 +1,4 @@
-package com.lawy;
+package com.lawy.summarization;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
